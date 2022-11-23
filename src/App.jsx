@@ -8,7 +8,11 @@ const [email, setEmail] = useState()
 const [password, setPassword] = useState() 
 
 const submitHandler = async (event) => {
-  
+  event.preventDefault()
+  console.log(username)
+  console.log(email)
+  console.log(password)
+  // call register function
 }
   return (
     <div className="container">
@@ -37,7 +41,7 @@ const submitHandler = async (event) => {
             <br></br>
             <button type='submit'>Click here to register</button>
         </form>
-
+        {/* TODO: Once register is working. I'd like a list of Registerd users to be displayed on this page */}
     </div>
   );
 };
