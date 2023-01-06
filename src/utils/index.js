@@ -1,7 +1,7 @@
 import { writeCookie } from "../common";
 export const register = async(bodyContent) => {
     try {
-        const response = await fetch("http://localhost:5001/createUser", {
+        const response = await fetch(process.env.REACT_APP_REST_API_URL+"createUser", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const register = async(bodyContent) => {
 
 export const readUsers = async() => {
     try {
-        const response = await fetch("http://localhost:5001/readUsers", {
+        const response = await fetch(process.env.REACT_APP_REST_API_URL+"readUsers", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const readUsers = async() => {
 
 export const loginUser = async(user, setter) => {
     try {
-        const response = await fetch("http://localhost:5001/loginUser", {
+        const response = await fetch(process.env.REACT_APP_REST_API_URL+"login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export const loginUser = async(user, setter) => {
 
 export const authCheck = async(cookieValue) => {
     try {
-        const response = await fetch("http://localhost:5001/authCheck", {
+        const response = await fetch(process.env.REACT_APP_REST_API_URL+"authCheck", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

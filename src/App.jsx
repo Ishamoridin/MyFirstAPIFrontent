@@ -9,12 +9,12 @@ import { authCheck } from "./utils";
 const App = () => {
   const [activeUser, setActiveUser] = useState();
   let cookie = getCookie('jwt_token')
-  if (cookie !== false) {
-    loginWithToken(cookie)
-  }
   const loginWithToken = async(cookie) => {
     const user = await authCheck(cookie)
     setActiveUser(user)
+  }
+  if (cookie !== false) {
+    loginWithToken(cookie)
   }
   return (
     <div>
