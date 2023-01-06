@@ -1,49 +1,29 @@
 import React from "react";
+import RegisterUser from "./components/RegisterUser";
+import ListUsers from "./components/ListUsers";
+import LoginUser from "./components/LoginUser";
 import { useState } from "react";
+import { getCookie } from "./common";
+import { authCheck } from "./utils";
 
 const App = () => {
-
-const [username, setUsername] = useState()
-const [email, setEmail] = useState()
-const [password, setPassword] = useState() 
-
-const submitHandler = async (event) => {
-  event.preventDefault()
-  console.log(username)
-  console.log(email)
-  console.log(password)
-  // call register function
-}
+  const [activeUser, setActiveUser] = useState();
+  let cookie = getCookie('jwt_token')
+  if (cookie !== false) {
+    loginWithToken(cookie)
+  }
+  const loginWithToken = async(cookie) => {
+    const user = await authCheck(cookie)
+    setActiveUser(user)
+  }
   return (
-    <div className="container">
-      <h1>Register users</h1>
-    
-      <form onSubmit ={submitHandler}>
-            <label> Username:
-                <br></br>
-                <input onChange={(event) => setUsername(event.target.value)} />
-            </label>
-            <br></br>
-            <br></br>
-
-            <label> Email:
-                <br></br>
-                <input onChange={(event) => setEmail(event.target.value)} />
-            </label>
-            <br></br>
-            <br></br>
-
-            <label> Password:
-                <br></br>
-                <input onChange={(event) => setPassword(event.target.value)} />
-            </label>
-            <br></br>
-            <br></br>
-            <button type='submit'>Click here to register</button>
-        </form>
-        {/* TODO: Once register is working. I'd like a list of Registerd users to be displayed on this page */}
-    </div>
-  );
+    <div>
+        {activeUser ? (<h1>{'Welcome' + activeUser}</h1>) : (<h1>Please login or register</h1>)}
+        <RegisterUser />
+        <ListUsers />
+        <LoginUser setter={setActiveUser}/>
+    </div>    
+  )
 };
 
 export default App;
